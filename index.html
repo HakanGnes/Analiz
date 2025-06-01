@@ -8,8 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
     html, body {
-      width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden;
       background: #f9f6ed;
+      width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden;
     }
     body {
       min-width: 960px; min-height: 540px;
@@ -18,172 +18,224 @@
     .mainwrap {
       width: 960px; height: 540px;
       display: flex; align-items: center; justify-content: center;
+      box-sizing: border-box;
     }
     .container {
-      width: 890px; height: 500px; margin: 0 auto;
-      background: #fff; border-radius: 32px;
-      box-shadow: 0 6px 40px #e2d5ba85, 0 0px 0px #fff;
-      padding: 40px 48px;
-      display: flex; flex-direction: column; align-items: center;
+      width: 920px; height: 500px;
+      background: #fff;
+      border-radius: 26px;
+      box-shadow: 0 6px 38px #e2d5ba70;
+      padding: 0;
       position: relative;
-      transition: box-shadow .25s;
+      display: flex; flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .headerbar {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: 30px 42px 0 42px;
+    }
+    .logo-title {
+      display: flex; align-items: center; gap: 13px;
       font-family: 'Quicksand', Arial, sans-serif;
     }
-    h1 {
-      font-size: 2.4rem; color: #27355d; font-weight: 700;
-      margin-bottom: 12px; letter-spacing: -1px;
-      text-shadow: 0 2px 10px #ebdebc2c;
+    .logo-title img {
+      width: 44px; height: 44px;
     }
-    h2 {
-      font-size: 1.32rem; color: #1976d2; margin: 16px 0 10px 0;
+    .title {
+      font-size: 2.1rem; color: #232c47; font-weight: 800;
+      letter-spacing: -1px; margin: 0;
+    }
+    .scorebox {
+      font-size: 1.1rem;
+      background: #fbecc2;
+      color: #ad831c;
+      border-radius: 40px;
+      padding: 7px 28px 7px 20px;
+      box-shadow: 0 2px 12px #f7e3b122;
       font-weight: 700;
     }
-    table {
-      width: 90%; margin: 1em auto; border-collapse: collapse;
+    .layoutrow {
+      display: flex; width: 100%; flex: 1;
+      margin-top: 15px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .leftcol {
+      width: 360px; margin-right: 28px;
+      display: flex; flex-direction: column;
+      align-items: flex-end; /* tablo sağda */
+    }
+    .rightcol {
+      width: 430px; display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+    }
+    .card {
       background: #f9f6ed;
-      border-radius: 12px;
+      border-radius: 18px;
+      box-shadow: 0 2px 18px #e2d5ba35;
+      padding: 19px 25px 21px 25px;
+      width: 100%;
+      margin-bottom: 16px;
+      font-size: 1.11rem;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    table {
+      width: 99%; margin: 0.5em auto 0.5em 0;
+      border-collapse: collapse;
+      background: #fdf8e7;
+      border-radius: 13px;
       overflow: hidden;
-      box-shadow: 0 2px 18px #f1eadc66;
+      box-shadow: 0 2px 18px #f1eadc56;
     }
     th, td {
-      border: 1px solid #ece1c7; padding: 10px 12px;
-      text-align: center; font-size: 1.04rem;
+      border: 1px solid #ebddc2;
+      padding: 10px 12px;
+      text-align: center; font-size: 1.02rem;
     }
     th {
-      background: #eae2c8; color: #947a45;
+      background: #f5e5b5; color: #ad831c;
       font-weight: 700;
     }
     button {
-      display: inline-block; margin-top: 16px;
       background: linear-gradient(90deg, #fae1a1 0%, #f1b359 100%);
-      color: #6d5b28; font-size: 1.12rem; font-weight: 700;
-      padding: .68rem 2.2rem;
-      border: none; border-radius: 16px; box-shadow: 0 2px 18px #fae1a1ab;
+      color: #6d5b28; font-size: 1.05rem; font-weight: 700;
+      padding: .56rem 2.1rem;
+      border: none; border-radius: 13px;
+      box-shadow: 0 2px 10px #fae1a1aa;
+      margin-top: 13px;
+      cursor: pointer;
       transition: background .2s, transform .2s;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
-    button:hover:enabled { background: #ffe7b4; transform: scale(1.04);}
+    button:hover:enabled { background: #ffe7b4; transform: scale(1.03);}
     button:disabled { background: #e9e0c7; color: #bbb;}
-    .card {
-      background: #f9f6ed;
-      border-radius: 15px;
-      padding: 14px 18px;
-      box-shadow: 0 2px 10px #e2d5ba60;
-      margin: 12px 0 18px 0;
-      width: 93%;
-      font-size: 1.08rem;
-    }
-    label { margin-bottom: 6px; display: block; font-size: 1.03rem;}
+    label { margin-bottom: 6px; display: block;}
     input[type=radio], select { margin-right: 8px; }
     .hide { display: none !important; }
-    .correct { color: #219859; font-weight: 700;}
+    .correct { color: #228859; font-weight: 700;}
     .wrong { color: #e34627; font-weight: 700;}
-    .score {
-      font-weight: 700; color: #dfa20b;
-      font-size: 1.12rem;
-      position: absolute; top: 26px; right: 44px;
-      background: #f9f6ed; padding: 8px 26px; border-radius: 40px;
-      box-shadow: 0 2px 12px #f7e3b140;
-      letter-spacing: 1px;
+    .chartwrap {
+      width: 94%; min-width: 320px; max-width: 420px; margin: 0 0 16px 0;
+      background: #f9f6ed;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #f1eadc39;
+      padding: 12px 8px 0 8px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .transition {
-      opacity: 0; transform: scale(.97);
-      transition: opacity .3s, transform .2s;
+    .card-ana {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 7px;
     }
-    .show {
-      opacity: 1 !important; transform: scale(1) !important;
-      transition: opacity .5s, transform .33s cubic-bezier(.44,1.4,.46,1.01);
+    .step-title {
+      font-size: 1.22rem; color: #2575b2; margin: 0 0 9px 0; font-weight: bold;
     }
-    .chartwrap { margin: 12px 0 18px 0; width: 400px; height: 220px; background: #f9f6ed; border-radius: 16px; box-shadow: 0 2px 10px #f2dabc50;}
-    @media (max-width:1000px) {
-      .mainwrap, .container { width: 99vw; height: 99vh; min-width: 360px; min-height: 400px;}
-      .chartwrap { width: 96vw;}
-    }
+    .answerlist ul { padding-left: 1.2em;}
+    .centered { text-align: center; width: 100%;}
   </style>
 </head>
 <body>
 <div class="mainwrap">
 <div class="container" id="maincont">
-  <h1>🔎 Veri Dedektifi Oyunu</h1>
-  <div id="step1" class="show">
-    <h2>1. Problemi Anlama ve Doğru Soru Sorma</h2>
-    <p>Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</p>
-    <form id="qform1">
-      <label><input type="radio" name="soru1" value="A"> Bu veriler neyi gösteriyor?</label>
-      <label><input type="radio" name="soru1" value="B"> Bir haftada hangi gün en fazla değer gerçekleşmiştir?</label>
-      <label><input type="radio" name="soru1" value="C"> Veri toplamak neden önemlidir?</label>
-      <button type="submit">Kontrol Et</button>
-    </form>
-    <div id="result1"></div>
-  </div>
-  <div id="step2" class="hide">
-    <h2>2. Veriyi Anlama</h2>
-    <div class="card">
-      <b>Veri tablosu:</b>
-      <table>
-        <thead><tr><th>Gün</th><th>Değer</th></tr></thead>
-        <tbody id="datatable"></tbody>
-      </table>
+  <!-- HEADER -->
+  <div class="headerbar">
+    <div class="logo-title">
+      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="ikon">
+      <span class="title">Veri Dedektifi Oyunu</span>
     </div>
-    <div class="card">
-      <b>Soru:</b> Kaç satır var? Kaç sütun var? Hangi değişkenler var? Türleri nedir?
+    <div class="scorebox">Skor: <span id="score">0</span></div>
+  </div>
+  <!-- OYUN AKIŞI -->
+  <div class="layoutrow">
+    <div class="leftcol">
+      <div class="card" id="tablocard">
+        <b>Veri Tablosu:</b>
+        <table>
+          <thead><tr><th>Gün</th><th>Değer</th></tr></thead>
+          <tbody id="datatable"></tbody>
+        </table>
+      </div>
     </div>
-    <button onclick="showStruct()">Cevabı Göster</button>
-    <div id="structAns" class="hide">
-      <ul>
-        <li><b>Satır:</b> 7</li>
-        <li><b>Sütun:</b> 2 (Gün, Değer)</li>
-        <li><b>Gün:</b> Kategorik (hafta günleri)</li>
-        <li><b>Değer:</b> Sayısal (adım sayısı vb.)</li>
-      </ul>
+    <div class="rightcol">
+      <!-- Her görev burada gösterilecek -->
+      <div class="card card-ana" id="step1">
+        <div class="step-title">1. Problemi Anlama ve Doğru Soru Sorma</div>
+        <div style="margin-bottom:14px;">Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</div>
+        <form id="qform1">
+          <label><input type="radio" name="soru1" value="A"> Bu veriler neyi gösteriyor?</label>
+          <label><input type="radio" name="soru1" value="B"> Bir haftada hangi gün en fazla değer gerçekleşmiştir?</label>
+          <label><input type="radio" name="soru1" value="C"> Veri toplamak neden önemlidir?</label>
+          <button type="submit">Kontrol Et</button>
+        </form>
+        <div id="result1"></div>
+      </div>
+      <div class="card card-ana hide" id="step2">
+        <div class="step-title">2. Veriyi Anlama</div>
+        <div class="centered" style="margin-bottom:6px;"><b>Soru:</b> Kaç satır var? Kaç sütun var? Hangi değişkenler var? Türleri nedir?</div>
+        <button onclick="showStruct()">Cevabı Göster</button>
+        <div id="structAns" class="answerlist hide">
+          <ul>
+            <li><b>Satır:</b> 7</li>
+            <li><b>Sütun:</b> 2 (Gün, Değer)</li>
+            <li><b>Gün:</b> Kategorik (hafta günleri)</li>
+            <li><b>Değer:</b> Sayısal (adım sayısı vb.)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card card-ana hide" id="step3">
+        <div class="step-title">3. Eksik ve Uç Değer Bulma</div>
+        <div style="margin-bottom:9px;">Tabloda bir eksik, bir de çok yüksek (uç) değer var. Seç bakalım!</div>
+        <form id="qform3">
+          <label>Eksik gün:
+            <select id="missing"><option value="">Seçiniz</option></select>
+          </label>
+          <label>Uç değer gün:
+            <select id="outlier"><option value="">Seçiniz</option></select>
+          </label>
+          <button type="submit">Kontrol Et</button>
+        </form>
+        <div id="result3"></div>
+      </div>
+      <div class="card card-ana hide" id="step4">
+        <div class="step-title">4. İstatistiksel Ölçüler</div>
+        <div style="margin-bottom:7px;">Eksik ve uç değerleri çıkardıktan sonra min, maks, ortalama, medyan ve mod değerlerini bul.</div>
+        <button onclick="showStats()">Cevabı Göster</button>
+        <ul id="statsAns" class="answerlist hide"></ul>
+      </div>
+      <div class="card card-ana hide" id="step5">
+        <div class="step-title">5. Veri Görselleştirme</div>
+        <div style="margin-bottom:7px;">Eksik ve uç değerler olmadan, haftalık veriyi grafikte göster:</div>
+        <div class="chartwrap"><canvas id="barChart" width="320" height="160"></canvas></div>
+        <button onclick="step(6)">Sonraki Görev</button>
+      </div>
+      <div class="card card-ana hide" id="step6">
+        <div class="step-title">6. Modelleme ve Yorumlama</div>
+        <div style="margin-bottom:7px;">Sistem model oluşturdu. Aşağıdaki yorumlardan hangisi veriye en uygunudur?</div>
+        <form id="qform6">
+          <label><input type="radio" name="yorum" value="A"> Tüm günler eşit dağılım gösteriyor.</label>
+          <label><input type="radio" name="yorum" value="B"> Hafta içinde genel olarak artış eğilimi var ama cuma günü uç değer bozucu etkide.</label>
+          <label><input type="radio" name="yorum" value="C"> Veri setinde hiçbir örüntü yok.</label>
+          <button type="submit">Kontrol Et</button>
+        </form>
+        <div id="result6"></div>
+      </div>
+      <div class="card card-ana hide" id="step7">
+        <div class="step-title">Tebrikler! Oyunu Tamamladın 🎉</div>
+        <div class="card" style="background:#fff7e3; color:#765b1c;">
+          Başarılı bir veri dedektifi oldun!<br>Yeniden oynamak ister misin?
+        </div>
+        <button onclick="window.location.reload()">Yeniden Oyna</button>
+      </div>
     </div>
   </div>
-  <div id="step3" class="hide">
-    <h2>3. Eksik ve Uç Değer Bulma</h2>
-    <p>Tabloda bir eksik, bir de çok yüksek (uç) değer var. Seç bakalım!</p>
-    <form id="qform3">
-      <label>Eksik gün:
-        <select id="missing"><option value="">Seçiniz</option></select>
-      </label>
-      <label>Uç değer gün:
-        <select id="outlier"><option value="">Seçiniz</option></select>
-      </label>
-      <button type="submit">Kontrol Et</button>
-    </form>
-    <div id="result3"></div>
-  </div>
-  <div id="step4" class="hide">
-    <h2>4. İstatistiksel Ölçüler</h2>
-    <p>Eksik ve uç değerleri çıkardıktan sonra min, maks, ortalama, medyan ve mod değerlerini bul.</p>
-    <button onclick="showStats()">Cevabı Göster</button>
-    <ul id="statsAns" class="hide"></ul>
-  </div>
-  <div id="step5" class="hide">
-    <h2>5. Veri Görselleştirme</h2>
-    <p>Eksik ve uç değerler olmadan, haftalık veriyi grafikte göster:</p>
-    <div class="chartwrap"><canvas id="barChart" width="380" height="190"></canvas></div>
-    <button onclick="step(6)">Sonraki Görev</button>
-  </div>
-  <div id="step6" class="hide">
-    <h2>6. Modelleme ve Yorumlama</h2>
-    <p>Sistem model oluşturdu. Aşağıdaki yorumlardan hangisi veriye en uygunudur?</p>
-    <form id="qform6">
-      <label><input type="radio" name="yorum" value="A"> Tüm günler eşit dağılım gösteriyor.</label>
-      <label><input type="radio" name="yorum" value="B"> Hafta içinde genel olarak artış eğilimi var ama cuma günü uç değer bozucu etkide.</label>
-      <label><input type="radio" name="yorum" value="C"> Veri setinde hiçbir örüntü yok.</label>
-      <button type="submit">Kontrol Et</button>
-    </form>
-    <div id="result6"></div>
-  </div>
-  <div id="step7" class="hide">
-    <h2>Tebrikler! Oyunu Tamamladın 🎉</h2>
-    <div class="card">
-      Başarılı bir veri dedektifi oldun! <br>
-      Yeniden oynamak ister misin?
-    </div>
-    <button onclick="window.location.reload()">Yeniden Oyna</button>
-  </div>
-  <div class="score">Skor: <span id="score">0</span></div>
 </div>
 </div>
 <script>
@@ -197,30 +249,24 @@ const data = [
   { day: "Pazar", value: 30 }
 ];
 let score = 0;
+// Tabloyu doldur (her sayfa)
+function fillTable() {
+  let t = ""; data.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
+  document.getElementById("datatable").innerHTML = t;
+}
+fillTable();
+// Akışı başlat ve kartları yönet
 function step(n) {
   for (let i=1;i<=7;i++) {
     document.getElementById("step"+i).classList.add("hide");
-    document.getElementById("step"+i).classList.remove("show");
   }
   document.getElementById("step"+n).classList.remove("hide");
-  setTimeout(()=>document.getElementById("step"+n).classList.add("show"),30);
   document.getElementById("score").textContent = score;
-  if (n === 2) fillTable();
   if (n === 3) fillSelects();
   if (n === 5) drawChart();
 }
 function addScore(val) {
   score += val; document.getElementById("score").textContent = score;
-}
-function fillTable() {
-  let t = ""; data.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
-  document.getElementById("datatable").innerHTML = t;
-}
-function fillSelects() {
-  let opt = "<option value=''>Seçiniz</option>";
-  data.forEach(d=>{ opt+=`<option value='${d.day}'>${d.day}</option>`; });
-  document.getElementById("missing").innerHTML = opt;
-  document.getElementById("outlier").innerHTML = opt;
 }
 // Görev 1 - Problemi anlama
 document.getElementById("qform1").onsubmit = function(e) {
@@ -234,7 +280,18 @@ document.getElementById("qform1").onsubmit = function(e) {
     result.innerHTML = "<span class='wrong'>Yanlış. Problemi anlamak için veriye yönelik soru sormalısın.</span>";
   }
 };
+// Görev 2 - Veri yapısı
+function showStruct() {
+  document.getElementById("structAns").classList.remove("hide");
+  addScore(10); setTimeout(()=>step(3),900);
+}
 // Görev 3 - Eksik/aykırı değer
+function fillSelects() {
+  let opt = "<option value=''>Seçiniz</option>";
+  data.forEach(d=>{ opt+=`<option value='${d.day}'>${d.day}</option>`; });
+  document.getElementById("missing").innerHTML = opt;
+  document.getElementById("outlier").innerHTML = opt;
+}
 document.getElementById("qform3").onsubmit = function(e) {
   e.preventDefault();
   const missing = document.getElementById("missing").value;
@@ -249,7 +306,6 @@ document.getElementById("qform3").onsubmit = function(e) {
 };
 // Görev 4 - İstatistik
 function showStats() {
-  // eksik ve uç (60) değer hariç: 20,25,35,40,30
   const vals = [20,25,35,40,30];
   const min = Math.min(...vals), max = Math.max(...vals);
   const mean = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
@@ -263,11 +319,6 @@ function showStats() {
     <li>Mod: <b>${mod}</b></li>`;
   s.classList.remove("hide");
   addScore(15); setTimeout(()=>step(5),1000);
-}
-// Görev 2 - Veri yapısı
-function showStruct() {
-  document.getElementById("structAns").classList.remove("hide");
-  addScore(10); setTimeout(()=>step(3),900);
 }
 // Görev 5 - Grafik
 function drawChart() {
@@ -306,4 +357,5 @@ step(1);
 </script>
 </body>
 </html>
+
 
