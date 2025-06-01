@@ -1,288 +1,309 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=960, initial-scale=1.0"/>
-  <title>Veri Bilimi Oyunu: Su Takibi</title>
+  <meta charset="UTF-8">
+  <title>Veri Dedektifi Oyunu</title>
+  <meta name="viewport" content="width=960, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    html, body { height:100%; margin:0; padding:0; }
+    html, body {
+      width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden;
+      background: #f9f6ed;
+    }
     body {
-      background: #f4f8fb;
+      min-width: 960px; min-height: 540px;
       display: flex; align-items: center; justify-content: center;
-      min-height: 100vh;
+    }
+    .mainwrap {
+      width: 960px; height: 540px;
+      display: flex; align-items: center; justify-content: center;
     }
     .container {
-      width: 960px; height: 540px;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 4px 32px #9fc3f944;
-      display: flex; flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 32px 28px 16px 28px;
-      box-sizing: border-box;
+      width: 890px; height: 500px; margin: 0 auto;
+      background: #fff; border-radius: 32px;
+      box-shadow: 0 6px 40px #e2d5ba85, 0 0px 0px #fff;
+      padding: 40px 48px;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
+      transition: box-shadow .25s;
+      font-family: 'Quicksand', Arial, sans-serif;
     }
-    h1 { text-align: center; color: #2368b8; font-size: 2.3rem; margin:0 0 8px 0;}
-    h2 { color: #2368b8; margin-bottom: 10px; margin-top: 0;}
-    .data-table { width: 370px; border-collapse: collapse; margin-bottom: 18px;}
-    th, td { border: 1px solid #dde; padding: 8px 6px; text-align: center; }
-    th { background: #f4f8fb;}
-    .btn { background: #2368b8; color: #fff; border: none; padding: 10px 26px; border-radius: 12px; font-weight: 500; cursor:pointer; margin: 10px 0 0 0; font-size: 1.1em;}
-    .btn:active { background: #174782;}
-    .hide { display: none; }
-    .step { width: 100%; max-width: 520px; margin:0 auto; }
-    .input-area { margin: 14px 0 6px 0;}
-    .answer { font-weight: bold; color: #23c486; margin-top:3px;}
-    .error { color:#ff3030; font-weight:500; }
-    textarea { width: 99%; border-radius: 9px; border:1px solid #dde; padding:8px; min-height:60px; font-size:1.03em;}
-    .chart-bar { background: #e4eefd; height: 20px; border-radius: 10px; margin-bottom: 5px; display: flex; align-items: center;}
-    .bar-label { min-width: 90px; text-align: right; margin-right: 10px; }
-    .bar-fill { height: 20px; border-radius: 10px; }
-    .mb-8 {margin-bottom:8px;}
-    .mt-4 {margin-top:18px;}
-    .mx-auto {margin-left:auto;margin-right:auto;}
-    .table-wrapper { width:100%; display:flex; justify-content:center;}
-    @media (max-width: 1020px) {
-      .container { width:99vw; height:auto; min-width:320px;}
-      .data-table { width: 97vw; font-size:0.96em;}
-      .step {max-width:99vw;}
+    h1 {
+      font-size: 2.4rem; color: #27355d; font-weight: 700;
+      margin-bottom: 12px; letter-spacing: -1px;
+      text-shadow: 0 2px 10px #ebdebc2c;
+    }
+    h2 {
+      font-size: 1.32rem; color: #1976d2; margin: 16px 0 10px 0;
+      font-weight: 700;
+    }
+    table {
+      width: 90%; margin: 1em auto; border-collapse: collapse;
+      background: #f9f6ed;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 18px #f1eadc66;
+    }
+    th, td {
+      border: 1px solid #ece1c7; padding: 10px 12px;
+      text-align: center; font-size: 1.04rem;
+    }
+    th {
+      background: #eae2c8; color: #947a45;
+      font-weight: 700;
+    }
+    button {
+      display: inline-block; margin-top: 16px;
+      background: linear-gradient(90deg, #fae1a1 0%, #f1b359 100%);
+      color: #6d5b28; font-size: 1.12rem; font-weight: 700;
+      padding: .68rem 2.2rem;
+      border: none; border-radius: 16px; box-shadow: 0 2px 18px #fae1a1ab;
+      transition: background .2s, transform .2s;
+      letter-spacing: 1px;
+    }
+    button:hover:enabled { background: #ffe7b4; transform: scale(1.04);}
+    button:disabled { background: #e9e0c7; color: #bbb;}
+    .card {
+      background: #f9f6ed;
+      border-radius: 15px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 10px #e2d5ba60;
+      margin: 12px 0 18px 0;
+      width: 93%;
+      font-size: 1.08rem;
+    }
+    label { margin-bottom: 6px; display: block; font-size: 1.03rem;}
+    input[type=radio], select { margin-right: 8px; }
+    .hide { display: none !important; }
+    .correct { color: #219859; font-weight: 700;}
+    .wrong { color: #e34627; font-weight: 700;}
+    .score {
+      font-weight: 700; color: #dfa20b;
+      font-size: 1.12rem;
+      position: absolute; top: 26px; right: 44px;
+      background: #f9f6ed; padding: 8px 26px; border-radius: 40px;
+      box-shadow: 0 2px 12px #f7e3b140;
+      letter-spacing: 1px;
+    }
+    .transition {
+      opacity: 0; transform: scale(.97);
+      transition: opacity .3s, transform .2s;
+    }
+    .show {
+      opacity: 1 !important; transform: scale(1) !important;
+      transition: opacity .5s, transform .33s cubic-bezier(.44,1.4,.46,1.01);
+    }
+    .chartwrap { margin: 12px 0 18px 0; width: 400px; height: 220px; background: #f9f6ed; border-radius: 16px; box-shadow: 0 2px 10px #f2dabc50;}
+    @media (max-width:1000px) {
+      .mainwrap, .container { width: 99vw; height: 99vh; min-width: 360px; min-height: 400px;}
+      .chartwrap { width: 96vw;}
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Veri Bilimi Oyunu: Su Takibi</h1>
-    <div class="table-wrapper">
-      <table class="data-table mx-auto">
-        <tr><th>Gün</th><th>İçilen Su (ml)</th></tr>
-        <tr><td>Pazartesi</td><td>1000</td></tr>
-        <tr><td>Salı</td><td>1200</td></tr>
-        <tr><td>Çarşamba</td><td>900</td></tr>
-        <tr><td>Perşembe</td><td>1500</td></tr>
-        <tr><td>Cuma</td><td>800</td></tr>
-        <tr><td>Cumartesi</td><td>1800</td></tr>
-        <tr><td>Pazar</td><td>700</td></tr>
+<div class="mainwrap">
+<div class="container" id="maincont">
+  <h1>🔎 Veri Dedektifi Oyunu</h1>
+  <div id="step1" class="show">
+    <h2>1. Problemi Anlama ve Doğru Soru Sorma</h2>
+    <p>Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</p>
+    <form id="qform1">
+      <label><input type="radio" name="soru1" value="A"> Bu veriler neyi gösteriyor?</label>
+      <label><input type="radio" name="soru1" value="B"> Bir haftada hangi gün en fazla değer gerçekleşmiştir?</label>
+      <label><input type="radio" name="soru1" value="C"> Veri toplamak neden önemlidir?</label>
+      <button type="submit">Kontrol Et</button>
+    </form>
+    <div id="result1"></div>
+  </div>
+  <div id="step2" class="hide">
+    <h2>2. Veriyi Anlama</h2>
+    <div class="card">
+      <b>Veri tablosu:</b>
+      <table>
+        <thead><tr><th>Gün</th><th>Değer</th></tr></thead>
+        <tbody id="datatable"></tbody>
       </table>
     </div>
-
-    <!-- Adım 1: Senaryo ve Tablo -->
-    <div id="step1" class="step">
-      <h2>Adım 1: Veriyi İncele</h2>
-      <p>Can, sağlıklı olmak için bir hafta boyunca her gün içtiği su miktarını kaydetti. Aşağıda günlere göre içtiği su miktarını görüyorsun.</p>
-      <button class="btn" onclick="showStep(2)">Başla</button>
+    <div class="card">
+      <b>Soru:</b> Kaç satır var? Kaç sütun var? Hangi değişkenler var? Türleri nedir?
     </div>
-
-    <!-- Adım 2: En fazla hangi gün -->
-    <div id="step2" class="step hide">
-      <h2>Adım 2: En Fazla Su İçilen Günü Bul</h2>
-      <p>Can en çok hangi gün su içmiştir? (Günü yaz)</p>
-      <div class="input-area">
-        <input type="text" id="maxInput" placeholder="Gün adı yaz (örn: Cumartesi)" style="padding:6px 8px; border-radius:8px; border:1px solid #bbb; width: 200px;" />
-        <button class="btn" onclick="checkMax()">Cevabı Kontrol Et</button>
-      </div>
-      <div id="maxFeedback"></div>
-    </div>
-
-    <!-- Adım 3: En az hangi gün -->
-    <div id="step3" class="step hide">
-      <h2>Adım 3: En Az Su İçilen Günü Bul</h2>
-      <p>Can en az hangi gün su içmiştir? (Günü yaz)</p>
-      <div class="input-area">
-        <input type="text" id="minInput" placeholder="Gün adı yaz (örn: Pazar)" style="padding:6px 8px; border-radius:8px; border:1px solid #bbb; width: 200px;" />
-        <button class="btn" onclick="checkMin()">Cevabı Kontrol Et</button>
-      </div>
-      <div id="minFeedback"></div>
-    </div>
-
-    <!-- Adım 4: Ortalama harcama -->
-    <div id="step4" class="step hide">
-      <h2>Adım 4: Ortalama Su Miktarını Hesapla</h2>
-      <p>Can bir günde ortalama kaç ml su içmiştir? (Tam sayı olarak yaz)</p>
-      <div class="input-area">
-        <input type="number" id="avgInput" placeholder="Ortalama (ml)" style="padding:6px 8px; border-radius:8px; border:1px solid #bbb; width: 120px;" />
-        <button class="btn" onclick="checkAvg()">Cevabı Kontrol Et</button>
-      </div>
-      <div id="avgFeedback"></div>
-    </div>
-
-    <!-- Adım 5: Hedefin Altında Kalan Günler -->
-    <div id="step5" class="step hide">
-      <h2>Adım 5: Hedefin Altında Kalan Günler</h2>
-      <p>Günlük hedef 1500 ml. Can bu hedefin altında kaç gün kalmıştır? (Sayısal olarak yaz)</p>
-      <div class="input-area">
-        <input type="number" id="belowInput" placeholder="Gün sayısı" style="padding:6px 8px; border-radius:8px; border:1px solid #bbb; width: 120px;" />
-        <button class="btn" onclick="checkBelow()">Cevabı Kontrol Et</button>
-      </div>
-      <div id="belowFeedback"></div>
-    </div>
-
-    <!-- Adım 6: Modelleme - Tahmin -->
-    <div id="step6" class="step hide">
-      <h2>Adım 6: Modelleme ve Tahmin</h2>
-      <p>Can, Cumartesi günü genellikle çok su içiyor. Sence bir sonraki Cumartesi günü kaç ml su içebilir? (Tahminini yaz)</p>
-      <div class="input-area">
-        <input type="number" id="modelInput" placeholder="Tahmin (ml)" style="padding:6px 8px; border-radius:8px; border:1px solid #bbb; width: 120px;" />
-        <button class="btn" onclick="checkModel()">Tahmini Kontrol Et</button>
-      </div>
-      <div id="modelFeedback"></div>
-    </div>
-
-    <!-- Adım 7: Görsel Bar Chart -->
-    <div id="step7" class="step hide">
-      <h2>Adım 7: Haftalık Su Tüketimi Grafiği</h2>
-      <div>Can'ın haftalık su tüketimi aşağıdaki gibidir:</div>
-      <div id="chartArea" class="mt-4"></div>
-      <button class="btn" onclick="showStep(8)">Sonraki</button>
-    </div>
-
-    <!-- Adım 8: Yansıtıcı Soru -->
-    <div id="step8" class="step hide">
-      <h2>Adım 8: Düşün ve Yaz</h2>
-      <p>
-        Eğer sen Can'ın yerinde olsaydın, <b>daha fazla su içmek için</b> neler yapardın? Hedefin olan 1500 ml'ye ulaşmak için kendi önerini yaz!
-      </p>
-      <textarea id="reflection" placeholder="Cevabını buraya yazabilirsin..."></textarea>
-      <button class="btn" onclick="showResult()">Oyunu Bitir</button>
-    </div>
-
-    <!-- Sonuç -->
-    <div id="result" class="step hide">
-      <h2>Tebrikler!</h2>
-      <p>Veriyi analiz ettin, tahmin yaptın ve çözüm önerini sundun.</p>
-      <p><b>Cevabın:</b></p>
-      <div id="finalReflection" style="background:#f4f8fb; padding:10px; border-radius:8px; margin-bottom:8px;"></div>
-      <button class="btn" onclick="restartGame()">Tekrar Oyna</button>
+    <button onclick="showStruct()">Cevabı Göster</button>
+    <div id="structAns" class="hide">
+      <ul>
+        <li><b>Satır:</b> 7</li>
+        <li><b>Sütun:</b> 2 (Gün, Değer)</li>
+        <li><b>Gün:</b> Kategorik (hafta günleri)</li>
+        <li><b>Değer:</b> Sayısal (adım sayısı vb.)</li>
+      </ul>
     </div>
   </div>
-  <script>
-    // Türkçe günler ve veri
-    const data = [
-      { gun: "Pazartesi", su: 1000 },
-      { gun: "Salı", su: 1200 },
-      { gun: "Çarşamba", su: 900  },
-      { gun: "Perşembe", su: 1500 },
-      { gun: "Cuma", su: 800  },
-      { gun: "Cumartesi", su: 1800 },
-      { gun: "Pazar", su: 700  }
-    ];
-    const hedef = 1500;
-
-    function showStep(step) {
-      for (let i = 1; i <= 8; i++) document.getElementById("step"+i).classList.add("hide");
-      document.getElementById("result").classList.add("hide");
-      if(step === 7) drawChart();
-      document.getElementById("step"+step).classList.remove("hide");
+  <div id="step3" class="hide">
+    <h2>3. Eksik ve Uç Değer Bulma</h2>
+    <p>Tabloda bir eksik, bir de çok yüksek (uç) değer var. Seç bakalım!</p>
+    <form id="qform3">
+      <label>Eksik gün:
+        <select id="missing"><option value="">Seçiniz</option></select>
+      </label>
+      <label>Uç değer gün:
+        <select id="outlier"><option value="">Seçiniz</option></select>
+      </label>
+      <button type="submit">Kontrol Et</button>
+    </form>
+    <div id="result3"></div>
+  </div>
+  <div id="step4" class="hide">
+    <h2>4. İstatistiksel Ölçüler</h2>
+    <p>Eksik ve uç değerleri çıkardıktan sonra min, maks, ortalama, medyan ve mod değerlerini bul.</p>
+    <button onclick="showStats()">Cevabı Göster</button>
+    <ul id="statsAns" class="hide"></ul>
+  </div>
+  <div id="step5" class="hide">
+    <h2>5. Veri Görselleştirme</h2>
+    <p>Eksik ve uç değerler olmadan, haftalık veriyi grafikte göster:</p>
+    <div class="chartwrap"><canvas id="barChart" width="380" height="190"></canvas></div>
+    <button onclick="step(6)">Sonraki Görev</button>
+  </div>
+  <div id="step6" class="hide">
+    <h2>6. Modelleme ve Yorumlama</h2>
+    <p>Sistem model oluşturdu. Aşağıdaki yorumlardan hangisi veriye en uygunudur?</p>
+    <form id="qform6">
+      <label><input type="radio" name="yorum" value="A"> Tüm günler eşit dağılım gösteriyor.</label>
+      <label><input type="radio" name="yorum" value="B"> Hafta içinde genel olarak artış eğilimi var ama cuma günü uç değer bozucu etkide.</label>
+      <label><input type="radio" name="yorum" value="C"> Veri setinde hiçbir örüntü yok.</label>
+      <button type="submit">Kontrol Et</button>
+    </form>
+    <div id="result6"></div>
+  </div>
+  <div id="step7" class="hide">
+    <h2>Tebrikler! Oyunu Tamamladın 🎉</h2>
+    <div class="card">
+      Başarılı bir veri dedektifi oldun! <br>
+      Yeniden oynamak ister misin?
+    </div>
+    <button onclick="window.location.reload()">Yeniden Oyna</button>
+  </div>
+  <div class="score">Skor: <span id="score">0</span></div>
+</div>
+</div>
+<script>
+const data = [
+  { day: "Pzt", value: 20 },
+  { day: "Salı", value: 25 },
+  { day: "Çrş", value: null },
+  { day: "Prş", value: 35 },
+  { day: "Cuma", value: 60 },
+  { day: "Cts", value: 40 },
+  { day: "Pazar", value: 30 }
+];
+let score = 0;
+function step(n) {
+  for (let i=1;i<=7;i++) {
+    document.getElementById("step"+i).classList.add("hide");
+    document.getElementById("step"+i).classList.remove("show");
+  }
+  document.getElementById("step"+n).classList.remove("hide");
+  setTimeout(()=>document.getElementById("step"+n).classList.add("show"),30);
+  document.getElementById("score").textContent = score;
+  if (n === 2) fillTable();
+  if (n === 3) fillSelects();
+  if (n === 5) drawChart();
+}
+function addScore(val) {
+  score += val; document.getElementById("score").textContent = score;
+}
+function fillTable() {
+  let t = ""; data.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
+  document.getElementById("datatable").innerHTML = t;
+}
+function fillSelects() {
+  let opt = "<option value=''>Seçiniz</option>";
+  data.forEach(d=>{ opt+=`<option value='${d.day}'>${d.day}</option>`; });
+  document.getElementById("missing").innerHTML = opt;
+  document.getElementById("outlier").innerHTML = opt;
+}
+// Görev 1 - Problemi anlama
+document.getElementById("qform1").onsubmit = function(e) {
+  e.preventDefault();
+  const val = document.querySelector("input[name=soru1]:checked")?.value;
+  const result = document.getElementById("result1");
+  if (val === "B") {
+    result.innerHTML = "<span class='correct'>Doğru! Problemi anlamak için doğru soruyu sordun.</span>";
+    addScore(10); setTimeout(()=>step(2),900);
+  } else {
+    result.innerHTML = "<span class='wrong'>Yanlış. Problemi anlamak için veriye yönelik soru sormalısın.</span>";
+  }
+};
+// Görev 3 - Eksik/aykırı değer
+document.getElementById("qform3").onsubmit = function(e) {
+  e.preventDefault();
+  const missing = document.getElementById("missing").value;
+  const outlier = document.getElementById("outlier").value;
+  const result = document.getElementById("result3");
+  if (missing === "Çrş" && outlier === "Cuma") {
+    result.innerHTML = "<span class='correct'>Tebrikler! Eksik ve uç değeri doğru buldun.</span>";
+    addScore(15); setTimeout(()=>step(4),1000);
+  } else {
+    result.innerHTML = "<span class='wrong'>Yanlış cevap. Eksik olan Çrş, uç değer ise Cuma.</span>";
+  }
+};
+// Görev 4 - İstatistik
+function showStats() {
+  // eksik ve uç (60) değer hariç: 20,25,35,40,30
+  const vals = [20,25,35,40,30];
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const mean = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  const medyan = vals.slice().sort((a,b)=>a-b)[Math.floor(vals.length/2)];
+  const mod = vals.sort((a,b) => vals.filter(v=>v===a).length-vals.filter(v=>v===b).length).pop();
+  const s = document.getElementById("statsAns");
+  s.innerHTML = `<li>Min: <b>${min}</b></li>
+    <li>Maks: <b>${max}</b></li>
+    <li>Ortalama: <b>${mean}</b></li>
+    <li>Medyan: <b>${medyan}</b></li>
+    <li>Mod: <b>${mod}</b></li>`;
+  s.classList.remove("hide");
+  addScore(15); setTimeout(()=>step(5),1000);
+}
+// Görev 2 - Veri yapısı
+function showStruct() {
+  document.getElementById("structAns").classList.remove("hide");
+  addScore(10); setTimeout(()=>step(3),900);
+}
+// Görev 5 - Grafik
+function drawChart() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  if(window.bar) window.bar.destroy();
+  window.bar = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: data.map(d=>d.day),
+      datasets: [{
+        label: "Veri (eksikler ve uç değerler hariç)",
+        data: data.map(d=>d.value==null||d.value==60?null:d.value),
+        backgroundColor: "#fae1a1"
+      }]
+    },
+    options: {
+      plugins: { legend: {display: false}},
+      scales: { y: { beginAtZero:true } }
     }
-
-    function normalize(str) {
-      return str.trim().toLowerCase().replace("i̇", "i"); // Türkçeye özel harf düzeltmesi
-    }
-
-    function checkMax() {
-      const input = normalize(document.getElementById("maxInput").value);
-      const correct = "cumartesi";
-      let feedback;
-      if (input === correct) {
-        feedback = `<span class="answer">Doğru! Cumartesi günü Can en çok su içti. (1800 ml)</span>
-        <br><button class="btn" onclick="showStep(3)">Sonraki Adım</button>`;
-      } else {
-        feedback = `<span class="error">Yanlış. Tekrar dene! (Cevap: Cumartesi)</span>`;
-      }
-      document.getElementById("maxFeedback").innerHTML = feedback;
-    }
-
-    function checkMin() {
-      const input = normalize(document.getElementById("minInput").value);
-      const correct = "pazar";
-      let feedback;
-      if (input === correct) {
-        feedback = `<span class="answer">Doğru! Pazar günü Can en az su içti. (700 ml)</span>
-        <br><button class="btn" onclick="showStep(4)">Sonraki Adım</button>`;
-      } else {
-        feedback = `<span class="error">Yanlış. Tekrar dene! (Cevap: Pazar)</span>`;
-      }
-      document.getElementById("minFeedback").innerHTML = feedback;
-    }
-
-    function checkAvg() {
-      const input = Number(document.getElementById("avgInput").value);
-      const correct = Math.round(data.reduce((acc, d) => acc + d.su, 0) / data.length);
-      let feedback;
-      if (input === correct) {
-        feedback = `<span class="answer">Doğru! Ortalama ${correct} ml.</span>
-        <br><button class="btn" onclick="showStep(5)">Sonraki Adım</button>`;
-      } else {
-        feedback = `<span class="error">Yanlış. Doğru cevap: ${correct} ml. Tekrar deneyebilirsin.</span>`;
-      }
-      document.getElementById("avgFeedback").innerHTML = feedback;
-    }
-
-    function checkBelow() {
-      const input = Number(document.getElementById("belowInput").value);
-      const correct = data.filter(d => d.su < hedef).length;
-      let feedback;
-      if (input === correct) {
-        feedback = `<span class="answer">Doğru! ${correct} gün hedefin altında kalındı.</span>
-        <br><button class="btn" onclick="showStep(6)">Sonraki Adım</button>`;
-      } else {
-        feedback = `<span class="error">Yanlış. Doğru cevap: ${correct} gün. Tekrar dene!</span>`;
-      }
-      document.getElementById("belowFeedback").innerHTML = feedback;
-    }
-
-    function checkModel() {
-      const input = Number(document.getElementById("modelInput").value);
-      const correct = data[5].su; // Cumartesi
-      let feedback;
-      if (Math.abs(input - correct) <= 150) {
-        feedback = `<span class="answer">Çok iyi tahmin! Gerçek değer: ${correct} ml.</span>
-        <br><button class="btn" onclick="showStep(7)">Sonraki Adım</button>`;
-      } else {
-        feedback = `<span class="error">Gerçek cevap: ${correct} ml. Tekrar deneyebilirsin!</span>`;
-      }
-      document.getElementById("modelFeedback").innerHTML = feedback;
-    }
-
-    function drawChart() {
-      const maxSu = Math.max(...data.map(d=>d.su));
-      const chartArea = document.getElementById("chartArea");
-      chartArea.innerHTML = '';
-      data.forEach(d => {
-        const width = Math.round(280 * d.su / maxSu);
-        const color = d.su >= hedef ? "#23c486" : "#2368b8";
-        chartArea.innerHTML += `
-          <div class="chart-bar">
-            <div class="bar-label">${d.gun}</div>
-            <div class="bar-fill" style="background:${color}; width:${width}px"></div>
-            <div style="margin-left:7px; font-size:.99em;">${d.su} ml</div>
-          </div>
-        `;
-      });
-    }
-
-    function showResult() {
-      document.getElementById("step8").classList.add("hide");
-      document.getElementById("result").classList.remove("hide");
-      document.getElementById("finalReflection").textContent = document.getElementById("reflection").value || "(Yanıt yok)";
-    }
-
-    function restartGame() {
-      document.getElementById("reflection").value = "";
-      showStep(1);
-      document.getElementById("maxInput").value = "";
-      document.getElementById("maxFeedback").innerHTML = "";
-      document.getElementById("minInput").value = "";
-      document.getElementById("minFeedback").innerHTML = "";
-      document.getElementById("avgInput").value = "";
-      document.getElementById("avgFeedback").innerHTML = "";
-      document.getElementById("belowInput").value = "";
-      document.getElementById("belowFeedback").innerHTML = "";
-      document.getElementById("modelInput").value = "";
-      document.getElementById("modelFeedback").innerHTML = "";
-    }
-
-    // Oyunu başlat
-    showStep(1);
-  </script>
+  });
+}
+// Görev 6 - Model yorum
+document.getElementById("qform6").onsubmit = function(e) {
+  e.preventDefault();
+  const val = document.querySelector("input[name=yorum]:checked")?.value;
+  const result = document.getElementById("result6");
+  if (val === "B") {
+    result.innerHTML = "<span class='correct'>Doğru! Verinin genel eğilimini doğru yorumladın.</span>";
+    addScore(20); setTimeout(()=>step(7),1100);
+  } else {
+    result.innerHTML = "<span class='wrong'>Yanlış. Tekrar dene!</span>";
+  }
+};
+// ilk adımı başlat
+step(1);
+</script>
 </body>
 </html>
+
