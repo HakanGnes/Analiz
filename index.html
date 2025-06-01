@@ -22,121 +22,123 @@
     }
     .container {
       width: 720px; height: 540px;
-      background: #fff;
-      border-radius: 26px;
-      box-shadow: 0 6px 38px #e2d5ba70;
+      background: #f9f6ed; /* Sadece ana renk */
+      border-radius: 30px;
+      box-shadow: 0 6px 36px #e0d4bb70, 0 0 0 #f9f6ed;
       padding: 0;
       position: relative;
       display: flex; flex-direction: column;
       justify-content: flex-start;
       align-items: center;
+      border: 2px solid #e5ddcb;
     }
     .headerbar {
       display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: 30px 42px 0 42px;
+      width: 100%; padding: 22px 32px 0 32px;
     }
     .logo-title {
-      display: flex; align-items: center; gap: 13px;
       font-family: 'Quicksand', Arial, sans-serif;
     }
-    .logo-title img {
-      width: 44px; height: 44px;
-    }
     .title {
-      font-size: 2.1rem; color: #232c47; font-weight: 800;
+      font-size: 1.7rem; color: #2e3b54; font-weight: 800;
       letter-spacing: -1px; margin: 0;
     }
     .scorebox {
-      font-size: 1.1rem;
-      background: #fbecc2;
-      color: #ad831c;
+      font-size: 1.08rem;
+      background: #e5ddcb;
+      color: #ac8b33;
       border-radius: 40px;
-      padding: 7px 28px 7px 20px;
-      box-shadow: 0 2px 12px #f7e3b122;
+      padding: 7px 22px 7px 18px;
+      box-shadow: 0 2px 9px #e5ddcb33;
       font-weight: 700;
+      border: 1.5px solid #e0d4bb;
     }
     .layoutrow {
       display: flex; width: 100%; flex: 1;
-      margin-top: 15px;
+      margin-top: 13px;
       align-items: flex-start;
       justify-content: center;
     }
     .leftcol {
-      width: 360px; margin-right: 28px;
+      width: 280px; margin-right: 15px;
       display: flex; flex-direction: column;
-      align-items: flex-end; /* tablo sağda */
+      align-items: flex-end;
     }
     .rightcol {
-      width: 430px; display: flex;
+      width: 340px; display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       height: 100%;
     }
     .card {
-      background: #f9f6ed;
-      border-radius: 18px;
-      box-shadow: 0 2px 18px #e2d5ba35;
-      padding: 19px 25px 21px 25px;
+      background: #f5eddc;
+      border-radius: 15px;
+      box-shadow: 0 2px 14px #e5ddcb33;
+      padding: 14px 19px 17px 19px;
       width: 100%;
-      margin-bottom: 16px;
-      font-size: 1.11rem;
-      color: #333;
+      margin-bottom: 13px;
+      font-size: 1.09rem;
+      color: #28323b;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      border: 1.2px solid #e5ddcb;
     }
     table {
-      width: 99%; margin: 0.5em auto 0.5em 0;
+      width: 100%; margin: 0.6em auto 0.5em 0;
       border-collapse: collapse;
-      background: #fdf8e7;
-      border-radius: 13px;
+      background: #f9f6ed;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 18px #f1eadc56;
+      box-shadow: 0 2px 10px #ede2ce30;
     }
     th, td {
-      border: 1px solid #ebddc2;
-      padding: 10px 12px;
-      text-align: center; font-size: 1.02rem;
+      border: 1px solid #e5ddcb;
+      padding: 7px 9px;
+      text-align: center; font-size: 1.01rem;
     }
     th {
-      background: #f5e5b5; color: #ad831c;
+      background: #ece3ce; color: #a48b2d;
       font-weight: 700;
     }
     button {
-      background: linear-gradient(90deg, #fae1a1 0%, #f1b359 100%);
-      color: #6d5b28; font-size: 1.05rem; font-weight: 700;
-      padding: .56rem 2.1rem;
-      border: none; border-radius: 13px;
-      box-shadow: 0 2px 10px #fae1a1aa;
-      margin-top: 13px;
+      background: linear-gradient(90deg, #f6e2b2 0%, #ead198 100%);
+      color: #846d29; font-size: 1.04rem; font-weight: 700;
+      padding: .48rem 1.6rem;
+      border: none; border-radius: 9px;
+      box-shadow: 0 2px 10px #ebdebb77;
+      margin-top: 10px;
       cursor: pointer;
       transition: background .2s, transform .2s;
       letter-spacing: 0.5px;
+      border: 1.1px solid #e5ddcb;
     }
-    button:hover:enabled { background: #ffe7b4; transform: scale(1.03);}
-    button:disabled { background: #e9e0c7; color: #bbb;}
+    button:hover:enabled { background: #faeecb; transform: scale(1.02);}
+    button:disabled { background: #e8e2d4; color: #bbb;}
     label { margin-bottom: 6px; display: block;}
     input[type=radio], select { margin-right: 8px; }
     .hide { display: none !important; }
-    .correct { color: #228859; font-weight: 700;}
+    .correct { color: #238f5b; font-weight: 700;}
     .wrong { color: #e34627; font-weight: 700;}
     .chartwrap {
-      width: 94%; min-width: 320px; max-width: 420px; margin: 0 0 16px 0;
-      background: #f9f6ed;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #f1eadc39;
-      padding: 12px 8px 0 8px;
+      width: 100%; min-width: 180px; max-width: 260px; margin: 0 0 10px 0;
+      background: #f8f2de;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #e5ddcb55;
+      padding: 8px 2px 0 2px;
       display: flex; align-items: center; justify-content: center;
+      border: 1px solid #e5ddcb;
     }
     .card-ana {
       background: none;
       box-shadow: none;
       padding: 0;
       margin-bottom: 7px;
+      border: none;
     }
     .step-title {
-      font-size: 1.22rem; color: #2575b2; margin: 0 0 9px 0; font-weight: bold;
+      font-size: 1.1rem; color: #2575b2; margin: 0 0 9px 0; font-weight: bold;
     }
     .answerlist ul { padding-left: 1.2em;}
     .centered { text-align: center; width: 100%;}
@@ -167,7 +169,7 @@
       <!-- Her görev burada gösterilecek -->
       <div class="card card-ana" id="step1">
         <div class="step-title">1. Problemi Anlama ve Doğru Soru Sorma</div>
-        <div style="margin-bottom:14px;">Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</div>
+        <div style="margin-bottom:11px;">Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</div>
         <form id="qform1">
           <label><input type="radio" name="soru1" value="A"> Bu veriler neyi gösteriyor?</label>
           <label><input type="radio" name="soru1" value="B"> Bir haftada hangi gün en fazla değer gerçekleşmiştir?</label>
@@ -191,7 +193,7 @@
       </div>
       <div class="card card-ana hide" id="step3">
         <div class="step-title">3. Eksik ve Uç Değer Bulma</div>
-        <div style="margin-bottom:9px;">Tabloda bir eksik, bir de çok yüksek (uç) değer var. Seç bakalım!</div>
+        <div style="margin-bottom:7px;">Tabloda bir eksik, bir de çok yüksek (uç) değer var. Seç bakalım!</div>
         <form id="qform3">
           <label>Eksik gün:
             <select id="missing"><option value="">Seçiniz</option></select>
@@ -212,7 +214,7 @@
       <div class="card card-ana hide" id="step5">
         <div class="step-title">5. Veri Görselleştirme</div>
         <div style="margin-bottom:7px;">Eksik ve uç değerler olmadan, haftalık veriyi grafikte göster:</div>
-        <div class="chartwrap"><canvas id="barChart" width="320" height="160"></canvas></div>
+        <div class="chartwrap"><canvas id="barChart" width="200" height="100"></canvas></div>
         <button onclick="step(6)">Sonraki Görev</button>
       </div>
       <div class="card card-ana hide" id="step6">
@@ -228,7 +230,7 @@
       </div>
       <div class="card card-ana hide" id="step7">
         <div class="step-title">Tebrikler! Oyunu Tamamladın 🎉</div>
-        <div class="card" style="background:#fff7e3; color:#765b1c;">
+        <div class="card" style="background:#f6ecd2; color:#765b1c;">
           Başarılı bir veri dedektifi oldun!<br>Yeniden oynamak ister misin?
         </div>
         <button onclick="window.location.reload()">Yeniden Oyna</button>
@@ -330,7 +332,7 @@ function drawChart() {
       datasets: [{
         label: "Veri (eksikler ve uç değerler hariç)",
         data: data.map(d=>d.value==null||d.value==60?null:d.value),
-        backgroundColor: "#fae1a1"
+        backgroundColor: "#f6e2b2"
       }]
     },
     options: {
@@ -356,5 +358,6 @@ step(1);
 </script>
 </body>
 </html>
+
 
 
