@@ -7,124 +7,22 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    html, body {
-      background: #f9f6ed;
-      width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden;
-    }
-    body {
-      min-width: 720px; min-height: 540px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .mainwrap {
-      width: 720px; height: 540px;
-      display: flex; align-items: center; justify-content: center;
-      box-sizing: border-box;
-    }
-    .container {
-      width: 720px; height: 540px;
-      background: #f9f6ed;
-      border-radius: 30px;
-      box-shadow: 0 6px 36px #e0d4bb70, 0 0 0 #f9f6ed;
-      padding: 0;
-      position: relative;
-      display: flex; flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      border: 2px solid #e5ddcb;
-      overflow: hidden;
-    }
-    .headerbar {
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; padding: 22px 32px 0 32px;
-      box-sizing: border-box;
-    }
+    html, body { background: #f9f6ed; width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden; }
+    body { min-width: 720px; min-height: 540px; display: flex; align-items: center; justify-content: center; }
+    .mainwrap { width: 720px; height: 540px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+    .container { width: 720px; height: 540px; background: #f9f6ed; border-radius: 30px; box-shadow: 0 6px 36px #e0d4bb70, 0 0 0 #f9f6ed; padding: 0; position: relative; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; border: 2px solid #e5ddcb; overflow: hidden;}
+    .headerbar { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 22px 32px 0 32px; box-sizing: border-box;}
     .logo-title { font-family: 'Quicksand', Arial, sans-serif; }
-    .title {
-      font-size: 1.7rem; color: #2e3b54; font-weight: 800;
-      letter-spacing: -1px; margin: 0;
-    }
-    .scorebox {
-      font-size: 1.08rem;
-      background: #e5ddcb;
-      color: #ac8b33;
-      border-radius: 40px;
-      padding: 7px 22px 7px 18px;
-      box-shadow: 0 2px 9px #e5ddcb33;
-      font-weight: 700;
-      border: 1.5px solid #e0d4bb;
-    }
-    .layoutrow {
-      display: flex; width: 100%; flex: 1;
-      margin-top: 13px;
-      align-items: flex-start;
-      justify-content: center;
-      box-sizing: border-box;
-      height: 420px;
-    }
-    .leftcol {
-      width: 220px; min-width: 190px; max-width:220px;
-      margin-right: 10px;
-      display: flex; flex-direction: column;
-      align-items: flex-end;
-      height: 100%;
-      justify-content: flex-start;
-    }
-    .rightcol {
-      width: 420px; min-width:320px; max-width:430px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      height: 100%;
-      overflow-y: auto;
-      padding-bottom: 10px;
-    }
-    .card {
-      background: #f5eddc;
-      border-radius: 15px;
-      box-shadow: 0 2px 14px #e5ddcb33;
-      padding: 14px 19px 17px 19px;
-      width: 100%;
-      margin-bottom: 13px;
-      font-size: 1.09rem;
-      color: #28323b;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      border: 1.2px solid #e5ddcb;
-      box-sizing: border-box;
-    }
-    table {
-      width: 100%; margin: 0.6em auto 0.5em 0;
-      border-collapse: collapse;
-      background: #f9f6ed;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px #ede2ce30;
-      font-size:1rem;
-    }
-    th, td {
-      border: 1px solid #e5ddcb;
-      padding: 7px 7px;
-      text-align: center;
-      font-size: 1.01rem;
-    }
-    th {
-      background: #ece3ce; color: #a48b2d;
-      font-weight: 700;
-    }
-    button {
-      background: linear-gradient(90deg, #f6e2b2 0%, #ead198 100%);
-      color: #846d29; font-size: 1.04rem; font-weight: 700;
-      padding: .48rem 1.6rem;
-      border: none; border-radius: 9px;
-      box-shadow: 0 2px 10px #ebdebb77;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: background .2s, transform .2s;
-      letter-spacing: 0.5px;
-      border: 1.1px solid #e5ddcb;
-    }
+    .title { font-size: 1.7rem; color: #2e3b54; font-weight: 800; letter-spacing: -1px; margin: 0;}
+    .scorebox { font-size: 1.08rem; background: #e5ddcb; color: #ac8b33; border-radius: 40px; padding: 7px 22px 7px 18px; box-shadow: 0 2px 9px #e5ddcb33; font-weight: 700; border: 1.5px solid #e0d4bb;}
+    .layoutrow { display: flex; width: 100%; flex: 1; margin-top: 13px; align-items: flex-start; justify-content: center; box-sizing: border-box; height: 420px;}
+    .leftcol { width: 220px; min-width: 190px; max-width:220px; margin-right: 10px; display: flex; flex-direction: column; align-items: flex-end; height: 100%; justify-content: flex-start;}
+    .rightcol { width: 420px; min-width:320px; max-width:430px; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; height: 100%; overflow-y: auto; padding-bottom: 10px;}
+    .card { background: #f5eddc; border-radius: 15px; box-shadow: 0 2px 14px #e5ddcb33; padding: 14px 19px 17px 19px; width: 100%; margin-bottom: 13px; font-size: 1.09rem; color: #28323b; display: flex; flex-direction: column; align-items: flex-start; border: 1.2px solid #e5ddcb; box-sizing: border-box;}
+    table { width: 100%; margin: 0.6em auto 0.5em 0; border-collapse: collapse; background: #f9f6ed; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px #ede2ce30; font-size:1rem;}
+    th, td { border: 1px solid #e5ddcb; padding: 7px 7px; text-align: center; font-size: 1.01rem;}
+    th { background: #ece3ce; color: #a48b2d; font-weight: 700;}
+    button { background: linear-gradient(90deg, #f6e2b2 0%, #ead198 100%); color: #846d29; font-size: 1.04rem; font-weight: 700; padding: .48rem 1.6rem; border: none; border-radius: 9px; box-shadow: 0 2px 10px #ebdebb77; margin-top: 10px; cursor: pointer; transition: background .2s, transform .2s; letter-spacing: 0.5px; border: 1.1px solid #e5ddcb;}
     button:hover:enabled { background: #faeecb; transform: scale(1.02);}
     button:disabled { background: #e8e2d4; color: #bbb;}
     label { margin-bottom: 6px; display: block;}
@@ -132,35 +30,13 @@
     .hide { display: none !important; }
     .correct { color: #238f5b; font-weight: 700;}
     .wrong { color: #e34627; font-weight: 700;}
-    .chartwrap {
-      width: 100%; min-width: 180px; max-width: 330px; margin: 0 0 10px 0;
-      background: #f8f2de;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px #e5ddcb55;
-      padding: 8px 2px 0 2px;
-      display: flex; align-items: center; justify-content: center;
-      border: 1px solid #e5ddcb;
-      min-height: 120px;
-      box-sizing: border-box;
-    }
-    .card-ana {
-      background: none;
-      box-shadow: none;
-      padding: 0;
-      margin-bottom: 7px;
-      border: none;
-    }
-    .step-title {
-      font-size: 1.1rem; color: #2575b2; margin: 0 0 9px 0; font-weight: bold;
-    }
+    .chartwrap { width: 100%; min-width: 180px; max-width: 330px; margin: 0 0 10px 0; background: #f8f2de; border-radius: 12px; box-shadow: 0 2px 8px #e5ddcb55; padding: 8px 2px 0 2px; display: flex; align-items: center; justify-content: center; border: 1px solid #e5ddcb; min-height: 120px; box-sizing: border-box;}
+    .card-ana { background: none; box-shadow: none; padding: 0; margin-bottom: 7px; border: none;}
+    .step-title { font-size: 1.1rem; color: #2575b2; margin: 0 0 9px 0; font-weight: bold;}
     .answerlist ul { padding-left: 1.2em;}
     .centered { text-align: center; width: 100%; }
     .nextbtn { margin-top: 12px; }
-    @media (max-width: 750px) {
-      .container, .mainwrap { width:100vw; min-width:0;}
-      .layoutrow { flex-direction: column; }
-      .leftcol, .rightcol { width:100% !important; max-width:100vw;}
-    }
+    @media (max-width: 750px) { .container, .mainwrap { width:100vw; min-width:0;} .layoutrow { flex-direction: column; } .leftcol, .rightcol { width:100% !important; max-width:100vw;} }
   </style>
 </head>
 <body>
@@ -168,12 +44,9 @@
 <div class="container" id="maincont">
   <!-- HEADER -->
   <div class="headerbar">
-    <div class="logo-title">
-      <span class="title">Veri Dedektifi Oyunu</span>
-    </div>
+    <div class="logo-title"><span class="title">Veri Dedektifi Oyunu</span></div>
     <div class="scorebox">Skor: <span id="score">0</span></div>
   </div>
-  <!-- OYUN AKIŞI -->
   <div class="layoutrow">
     <div class="leftcol">
       <div class="card" id="tablocard">
@@ -185,7 +58,6 @@
       </div>
     </div>
     <div class="rightcol">
-      <!-- Her görev burada gösterilecek -->
       <div class="card card-ana" id="step1">
         <div class="step-title">1. Problemi Anlama ve Doğru Soru Sorma</div>
         <div style="margin-bottom:11px;">Bir haftalık veri var. Sence aşağıdaki sorulardan hangisi veriye uygun problem tanımı olur?</div>
@@ -225,19 +97,27 @@
           <button type="submit">Kontrol Et</button>
         </form>
         <div id="result3"></div>
-        <button id="next3" class="nextbtn hide" onclick="step(4)">Sonraki</button>
+        <button id="next3" class="nextbtn hide" onclick="showImputeStep()">Sonraki</button>
+      </div>
+      <div class="card card-ana hide" id="stepImpute">
+        <div class="step-title">4. Eksik Değeri Ortalama ile Doldurma</div>
+        <div style="margin-bottom:7px;">
+          Çarşamba günü eksikti. Eksik değeri ortalama ile dolduruyoruz.<br>
+          <span id="imputeValueTxt"></span>
+        </div>
+        <button onclick="step(4)">Devam Et</button>
       </div>
       <div class="card card-ana hide" id="step4">
-        <div class="step-title">4. İstatistiksel Ölçüler</div>
-        <div style="margin-bottom:7px;">Eksik ve uç değerleri çıkardıktan sonra min, maks, ortalama, medyan ve mod değerlerini bul.</div>
+        <div class="step-title">5. İstatistiksel Ölçüler</div>
+        <div style="margin-bottom:7px;">Eksik ve uç değer ortalama ile doldurulduktan sonra min, maks, ortalama, medyan ve mod değerlerini bul.</div>
         <button onclick="showStats()">Cevabı Göster</button>
         <ul id="statsAns" class="answerlist hide"></ul>
         <button id="next4" class="nextbtn hide" onclick="step(5)">Sonraki</button>
       </div>
       <div class="card card-ana hide" id="step5">
-        <div class="step-title">5. Veri Görselleştirme</div>
+        <div class="step-title">6. Veri Görselleştirme</div>
         <div style="margin-bottom:7px;">
-          Eksik ve uç değerler olmadan, haftalık veriyi <b>kendin grafiğe ekle:</b>
+          Tüm verileri sırayla grafiğe ekle: <span style="font-size:0.99em;color:#888;">(Eksik olan Çarşamba ortalama ile dolduruldu.)</span>
         </div>
         <div style="font-size:1rem; margin-bottom:10px;">
           <span id="nextDataLabel"></span>
@@ -247,7 +127,7 @@
         <button id="nextStep5" class="hide" onclick="step(6)">Sonraki Görev</button>
       </div>
       <div class="card card-ana hide" id="step6">
-        <div class="step-title">6. Modelleme ve Yorumlama</div>
+        <div class="step-title">7. Modelleme ve Yorumlama</div>
         <div style="margin-bottom:7px;">Sistem model oluşturdu. Aşağıdaki yorumlardan hangisi veriye en uygunudur?</div>
         <form id="qform6">
           <label><input type="radio" name="yorum" value="A"> Tüm günler eşit dağılım gösteriyor.</label>
@@ -260,9 +140,7 @@
       </div>
       <div class="card card-ana hide" id="step7">
         <div class="step-title">Tebrikler! Oyunu Tamamladın 🎉</div>
-        <div class="card" style="background:#f6ecd2; color:#765b1c;" id="scoreResult">
-          <!-- Sonuç burada -->
-        </div>
+        <div class="card" style="background:#f6ecd2; color:#765b1c;" id="scoreResult"></div>
         <button onclick="window.location.reload()">Yeniden Oyna</button>
       </div>
     </div>
@@ -270,7 +148,7 @@
 </div>
 </div>
 <script>
-const data = [
+const baseData = [
   { day: "Pzt", value: 20 },
   { day: "Salı", value: 25 },
   { day: "Çrş", value: null },
@@ -281,18 +159,97 @@ const data = [
 ];
 let score = 0;
 
-// Tabloyu doldur
-function fillTable() {
-  let t = ""; data.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
+let fullData = [];
+let imputedValue = null;
+
+function fillTable(dataArr=baseData) {
+  let t = "";
+  dataArr.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
   document.getElementById("datatable").innerHTML = t;
 }
 fillTable();
 
-// Grafik ekleme - Öğrenci ekliyor
+// step fonksiyonu
+function step(n) {
+  for (let i=1;i<=8;i++) {
+    let el = document.getElementById("step"+(i===4.5?"Impute":i));
+    if(el) el.classList.add("hide");
+  }
+  if(n===3.5) {
+    document.getElementById("stepImpute").classList.remove("hide");
+  } else {
+    document.getElementById("step"+n).classList.remove("hide");
+  }
+  document.getElementById("score").textContent = score;
+  if (n === 3) {
+    fillSelects();
+    document.getElementById("next3").classList.add("hide");
+    document.getElementById("result3").innerHTML = "";
+  }
+  if (n === 4) document.getElementById("next4").classList.add("hide");
+  if (n === 5) resetChartStep();
+  if (n === 7) document.getElementById("scoreResult").innerHTML = getScoreResult(score);
+}
+
+// Eksik/aykırı değer
+function fillSelects() {
+  let opt = "<option value=''>Seçiniz</option>";
+  baseData.forEach(d=>{ opt+=`<option value='${d.day}'>${d.day}</option>`; });
+  document.getElementById("missing").innerHTML = opt;
+  document.getElementById("outlier").innerHTML = opt;
+}
+document.getElementById("qform3").onsubmit = function(e) {
+  e.preventDefault();
+  const missing = document.getElementById("missing").value;
+  const outlier = document.getElementById("outlier").value;
+  const result = document.getElementById("result3");
+  const nextBtn = document.getElementById("next3");
+  if (missing === "Çrş" && outlier === "Cuma") {
+    result.innerHTML = "<span class='correct'>Tebrikler! Eksik ve uç değeri doğru buldun.</span>";
+    addScore(15);
+    nextBtn.classList.remove("hide");
+  } else {
+    result.innerHTML = "<span class='wrong'>Yanlış cevap. Eksik olan Çrş, uç değer ise Cuma.</span>";
+    nextBtn.classList.add("hide");
+  }
+};
+
+// Eksik değeri ortalama ile doldurma adımı
+function showImputeStep() {
+  // Ortalama (uç ve eksik hariç): [20,25,35,40,30] = 150/5 = 30
+  imputedValue = Math.round((20+25+35+40+30)/5);
+  fullData = baseData.map(d=>d.day==="Çrş" ? {day:"Çrş", value:imputedValue} : {...d});
+  fillTable(fullData);
+  document.getElementById("imputeValueTxt").innerHTML = `Ortalama: <b>${imputedValue}</b> olarak hesaplandı ve Çarşamba gününe yazıldı.`;
+  step(3.5);
+}
+
+// İstatistik adımı
+function showStats() {
+  // Tüm dolu verileri kullanıyoruz
+  const vals = fullData.map(d=>d.value);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const mean = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
+  const sorted = vals.slice().sort((a,b)=>a-b);
+  const medyan = sorted[Math.floor(vals.length/2)];
+  // Mod hesabı (sık görülen)
+  let freq = {}; vals.forEach(v=>freq[v]=(freq[v]||0)+1);
+  let mod = vals[0], maxf = 0;
+  for(const k in freq) if(freq[k]>maxf) {maxf=freq[k];mod=k;}
+  const s = document.getElementById("statsAns");
+  s.innerHTML = `<li>Min: <b>${min}</b></li>
+    <li>Maks: <b>${max}</b></li>
+    <li>Ortalama: <b>${mean}</b></li>
+    <li>Medyan: <b>${medyan}</b></li>
+    <li>Mod: <b>${mod}</b></li>`;
+  s.classList.remove("hide");
+  addScore(15);
+  document.getElementById("next4").classList.remove("hide");
+}
+
+// Grafik (öğrenci eklemesi)
 let chartLabels = [], chartData = [];
 let addDataIndex = 0;
-const chartAddData = data.filter(d => d.value !== null && d.value !== 60); // eksik ve uç değer hariç
-
 function resetChartStep() {
   chartLabels = [];
   chartData = [];
@@ -303,28 +260,26 @@ function resetChartStep() {
 }
 
 function updateChartPrompt() {
-  if (addDataIndex < chartAddData.length) {
-    const d = chartAddData[addDataIndex];
+  if (addDataIndex < fullData.length) {
+    const d = fullData[addDataIndex];
     document.getElementById("nextDataLabel").innerHTML = `<b>${d.day}</b> - <b>${d.value}</b>`;
     document.getElementById("addBarBtn").disabled = false;
   } else {
     document.getElementById("nextDataLabel").innerHTML = `<span style="color:#2e3b54;">Tüm verileri grafiğe ekledin!</span>`;
     document.getElementById("addBarBtn").disabled = true;
     document.getElementById("nextStep5").classList.remove("hide");
-    addScore(10); // Görselleştirme puanı
+    addScore(10);
   }
 }
-
 function addBarToChart() {
-  if (addDataIndex < chartAddData.length) {
-    chartLabels.push(chartAddData[addDataIndex].day);
-    chartData.push(chartAddData[addDataIndex].value);
+  if (addDataIndex < fullData.length) {
+    chartLabels.push(fullData[addDataIndex].day);
+    chartData.push(fullData[addDataIndex].value);
     addDataIndex++;
     drawChartStep();
     updateChartPrompt();
   }
 }
-
 let userBarChart = null;
 function drawChartStep() {
   const ctx = document.getElementById('barChart').getContext('2d');
@@ -346,59 +301,14 @@ function drawChartStep() {
   });
 }
 
-// Adım fonksiyonu
-function step(n) {
-  for (let i=1;i<=7;i++) {
-    document.getElementById("step"+i).classList.add("hide");
-  }
-  document.getElementById("step"+n).classList.remove("hide");
-  document.getElementById("score").textContent = score;
-  if (n === 3) fillSelects();
-  if (n === 5) resetChartStep();
-  if (n === 7) {
-    document.getElementById("scoreResult").innerHTML = getScoreResult(score);
-  }
-}
-
 // Sonuç değerlendirmesi
 function getScoreResult(score) {
-  if (score <= 30) return `
-    <b>0–30 Puan → Çaylak Dedektif</b><br>
-    Sonuç: Çaylak Dedektif<br>
-    İlk adımlar her zaman en zorudur. Ama sen başladın bile!<br>
-    Verilere biraz daha dikkatli bakarsan harika ipuçları yakalayabilirsin.<br>
-    Haydi tekrar dene, dedektiflik yeteneklerini geliştir!
-  `;
-  if (score <= 50) return `
-    <b>31–50 Puan → İpucu Avcısı</b><br>
-    Sonuç: İpucu Avcısı<br>
-    Harika bir başlangıç yaptın! Verideki bazı izleri yakaladın.<br>
-    Belki bazı bağlantıları gözden kaçırmış olabilirsin ama yoldasın.<br>
-    Unutma: Her başarılı dedektif önce izleri okumayı öğrenir.
-  `;
-  if (score <= 70) return `
-    <b>51–70 Puan → Veri Ustası</b><br>
-    Sonuç: Veri Ustası<br>
-    Gerçekten etkileyicisin! Verilerle aranda güçlü bir bağ var.<br>
-    Örüntüleri tanıyor, sayılarla konuşabiliyorsun.<br>
-    Tahminlerin çoğu isabetli! Ama biliyor musun? Bir üst seviye seni bekliyor!
-  `;
-  if (score <= 85) return `
-    <b>71–85 Puan → Örüntü Dedektifi</b><br>
-    Sonuç: Örüntü Dedektifi<br>
-    Sen sıradan biri değilsin; verilerin içindeki gizli yolları bulabiliyorsun.<br>
-    Ne zaman ne olduğunu öngörme gücün çok yüksek.
-  `;
-  return `
-    <b>86–100 Puan → Veri Profesörü</b><br>
-    Sonuç: Veri Profesörü<br>
-    Tebrikler! Sen artık bir Veri Profesörüsün!<br>
-    Grafikler, sayılar, örüntüler… hepsi senin elinde anlam kazanıyor.<br>
-    Verilerle düşünmeyi, analiz etmeyi ve tahmin üretmeyi başardın.<br>
-    Veri senin dilin olmuş. Artık başkalarına da öğretmeye hazırsın!
-  `;
+  if (score <= 30) return `<b>0–30 Puan → Çaylak Dedektif</b><br>Sonuç: Çaylak Dedektif<br>İlk adımlar her zaman en zorudur. Ama sen başladın bile!<br>Verilere biraz daha dikkatli bakarsan harika ipuçları yakalayabilirsin.<br>Haydi tekrar dene, dedektiflik yeteneklerini geliştir!`;
+  if (score <= 50) return `<b>31–50 Puan → İpucu Avcısı</b><br>Sonuç: İpucu Avcısı<br>Harika bir başlangıç yaptın! Verideki bazı izleri yakaladın.<br>Belki bazı bağlantıları gözden kaçırmış olabilirsin ama yoldasın.<br>Unutma: Her başarılı dedektif önce izleri okumayı öğrenir.`;
+  if (score <= 70) return `<b>51–70 Puan → Veri Ustası</b><br>Sonuç: Veri Ustası<br>Gerçekten etkileyicisin! Verilerle aranda güçlü bir bağ var.<br>Örüntüleri tanıyor, sayılarla konuşabiliyorsun.<br>Tahminlerin çoğu isabetli! Ama biliyor musun? Bir üst seviye seni bekliyor!`;
+  if (score <= 85) return `<b>71–85 Puan → Örüntü Dedektifi</b><br>Sonuç: Örüntü Dedektifi<br>Sen sıradan biri değilsin; verilerin içindeki gizli yolları bulabiliyorsun.<br>Ne zaman ne olduğunu öngörme gücün çok yüksek.`;
+  return `<b>86–100 Puan → Veri Profesörü</b><br>Sonuç: Veri Profesörü<br>Tebrikler! Sen artık bir Veri Profesörüsün!<br>Grafikler, sayılar, örüntüler… hepsi senin elinde anlam kazanıyor.<br>Verilerle düşünmeyi, analiz etmeyi ve tahmin üretmeyi başardın.<br>Veri senin dilin olmuş. Artık başkalarına da öğretmeye hazırsın!`;
 }
-
 function addScore(val) {
   score += val; document.getElementById("score").textContent = score;
 }
@@ -425,48 +335,8 @@ function showStruct() {
   addScore(10);
 }
 
-// Görev 3 - Eksik/aykırı değer
-function fillSelects() {
-  let opt = "<option value=''>Seçiniz</option>";
-  data.forEach(d=>{ opt+=`<option value='${d.day}'>${d.day}</option>`; });
-  document.getElementById("missing").innerHTML = opt;
-  document.getElementById("outlier").innerHTML = opt;
-}
-document.getElementById("qform3").onsubmit = function(e) {
-  e.preventDefault();
-  const missing = document.getElementById("missing").value;
-  const outlier = document.getElementById("outlier").value;
-  const result = document.getElementById("result3");
-  const nextBtn = document.getElementById("next3");
-  if (missing === "Çrş" && outlier === "Cuma") {
-    result.innerHTML = "<span class='correct'>Tebrikler! Eksik ve uç değeri doğru buldun.</span>";
-    addScore(15);
-    nextBtn.classList.remove("hide");
-  } else {
-    result.innerHTML = "<span class='wrong'>Yanlış cevap. Eksik olan Çrş, uç değer ise Cuma.</span>";
-    nextBtn.classList.add("hide");
-  }
-};
+// İstatistiksel ölçü ve modelleme aynı
 
-// Görev 4 - İstatistik
-function showStats() {
-  const vals = [20,25,35,40,30];
-  const min = Math.min(...vals), max = Math.max(...vals);
-  const mean = Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
-  const medyan = vals.slice().sort((a,b)=>a-b)[Math.floor(vals.length/2)];
-  const mod = vals.sort((a,b) => vals.filter(v=>v===a).length-vals.filter(v=>v===b).length).pop();
-  const s = document.getElementById("statsAns");
-  s.innerHTML = `<li>Min: <b>${min}</b></li>
-    <li>Maks: <b>${max}</b></li>
-    <li>Ortalama: <b>${mean}</b></li>
-    <li>Medyan: <b>${medyan}</b></li>
-    <li>Mod: <b>${mod}</b></li>`;
-  s.classList.remove("hide");
-  addScore(15);
-  document.getElementById("next4").classList.remove("hide");
-}
-
-// Görev 6 - Model yorum
 document.getElementById("qform6").onsubmit = function(e) {
   e.preventDefault();
   const val = document.querySelector("input[name=yorum]:checked")?.value;
@@ -482,9 +352,9 @@ document.getElementById("qform6").onsubmit = function(e) {
   }
 };
 
-// Oyunu başlat
 step(1);
 </script>
 </body>
 </html>
+
 
