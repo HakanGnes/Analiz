@@ -117,9 +117,16 @@
       </div>
       <div class="card card-ana hide" id="step5">
         <div class="step-title">5. Veri Görselleştirme</div>
-        <div style="margin-bottom:7px;">Eksik ve uç değerler olmadan, haftalık veriyi grafikte göster:</div>
+        <div style="margin-bottom:7px;">
+          Eksik ve uç değerler olmadan, haftalık veriyi <b>kendin grafiğe ekle:</b>
+        </div>
+        <div style="font-size:1rem; margin-bottom:10px;">
+          <span id="nextDataLabel"></span>
+          <button id="addBarBtn" onclick="addBarToChart()">Ekle</button>
+        </div>
         <div class="chartwrap"><canvas id="barChart" width="200" height="100"></canvas></div>
-        <button onclick="step(6)">Sonraki Görev</button>
+        <button id="nextStep5" class="hide" onclick="step(6)">Sonraki Görev</button>
+      </div>
       </div>
       <div class="card card-ana hide" id="step6">
         <div class="step-title">6. Modelleme ve Yorumlama</div>
@@ -156,12 +163,65 @@ const data = [
 ];
 let score = 0;
 
-function fillTable() {
-  let t = ""; data.forEach(d=>t+=`<tr><td>${d.day}</td><td>${d.value==null?"?" : d.value}</td></tr>`);
-  document.getElementById("datatable").innerHTML = t;
-}
-fillTable();
+// --- GRAFİKTE KULLANICI EKLEME ADIMI ---
+let chartLabels = [], chartData = [];
+let addDataIndex = 0;
+const chartAddData = data.filter(d => d.value !== null && d.value !== 60); // eksik ve uç değer hariç
 
+function resetChartStep() {
+  chartLabels = [];
+  chartData = [];
+  addDataIndex = 0;
+  updateChartPrompt();
+  drawChartStep();
+  document.getElementById("nextStep5").classList.add("hide");
+}
+
+function updateChartPrompt() {
+  if (addDataIndex < chartAddData.length) {
+    const d = chartAddData[addDataIndex];
+    document.getElementById("nextDataLabel").innerHTML = `<b>${d.day}</b> - <b>${d.value}</b>`;
+    document.getElementById("addBarBtn").disabled = false;
+  } else {
+    document.getElementById("nextDataLabel").innerHTML = `<span style="color:#2e3b54;">Tüm verileri grafiğe ekledin!</span>`;
+    document.getElementById("addBarBtn").disabled = true;
+    document.getElementById("nextStep5").classList.remove("hide");
+    addScore(10); // Görselleştirme puanı
+  }
+}
+
+function addBarToChart() {
+  if (addDataIndex < chartAddData.length) {
+    chartLabels.push(chartAddData[addDataIndex].day);
+    chartData.push(chartAddData[addDataIndex].value);
+    addDataIndex++;
+    drawChartStep();
+    updateChartPrompt();
+  }
+}
+
+let userBarChart = null;
+function drawChartStep() {
+  const ctx = document.getElementById('barChart').getContext('2d');
+  if(userBarChart) userBarChart.destroy();
+  userBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: chartLabels,
+      datasets: [{
+        label: "Kullanıcı Eklediği Veri",
+        data: chartData,
+        backgroundColor: "#f6e2b2"
+      }]
+    },
+    options: {
+      plugins: { legend: {display: false}},
+      scales: { y: { beginAtZero:true } }
+    }
+  });
+}
+
+// step fonksiyonunda 5. adıma geldiğinde sıfırla
 function step(n) {
   for (let i=1;i<=7;i++) {
     document.getElementById("step"+i).classList.add("hide");
@@ -169,7 +229,7 @@ function step(n) {
   document.getElementById("step"+n).classList.remove("hide");
   document.getElementById("score").textContent = score;
   if (n === 3) fillSelects();
-  if (n === 5) drawChart();
+  if (n === 5) resetChartStep();
   if (n === 7) {
     document.getElementById("scoreResult").innerHTML = getScoreResult(score);
   }
